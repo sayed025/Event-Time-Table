@@ -1,14 +1,46 @@
 <section class="event-section">
-  <mat-tab-group>
+  <mat-tab-group >
     <mat-tab *ngFor="let day of weekDays">
       <ng-template mat-tab-label>
-        <div>
-          <p>{{ day.dayName }}</p>
-          <p>Date: {{ day.date }}</p>
+        <div class="tab-label">
+          <div class="day-name">{{ day.dayName }}</div>
+          <div class="date">{{ day.date }}</div>
         </div>
       </ng-template>
-      <!-- Tab content -->
-      Content for {{ day.dayName }}
+      
+      <!-- Timetable Grid -->
+      <div class="timetable-container">
+        <table class="timetable-grid">
+          <!-- Header Row -->
+          <thead>
+            <tr class="header-row">
+              <th class="time-header">Time</th>
+              <th class="venue-header" *ngFor="let venue of venues">
+                {{ venue.name }}
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Time Slots -->
+          <tbody>
+            <tr class="time-row" *ngFor="let time of timeSlots">
+              <td class="time-cell">{{ time }}</td>
+              <ng-container *ngFor="let venue of venues">
+                <td 
+                  *ngIf="isFirstSlotOfEvent(day.date, time, venue.name) || !getEventForSlot(day.date, time, venue.name)"
+                  class="event-cell" 
+                  [class.has-event]="getEventForSlot(day.date, time, venue.name)"
+                  [attr.rowspan]="getEventForSlot(day.date, time, venue.name) ? getEventRowSpan(day.date, time, venue.name) : 1"
+                  [attr.title]="getEventForSlot(day.date, time, venue.name)?.name">
+                  <span class="event-name" *ngIf="getEventForSlot(day.date, time, venue.name) as event">
+                    {{ event.name }}
+                  </span>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </section>
