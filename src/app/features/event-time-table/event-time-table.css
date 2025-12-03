@@ -6,6 +6,10 @@
   min-width: 250px !important;
 }
 
+.event-section {
+  margin-top: 2rem;
+}
+
 .tab-label {
   display: flex;
   flex-direction: column;
@@ -31,8 +35,8 @@
 }
 
 .timetable-container {
-  padding: 1.5rem;
   overflow: auto;
+  max-height: 550px;
   position: relative;
   background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -58,12 +62,11 @@
 }
 
 .timetable-grid {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .header-row {
@@ -77,21 +80,27 @@
   text-align: center;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  position: sticky;
-  top: 0;
-  z-index: 20;
   min-width: 150px;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.5px;
-  background: inherit;
+}
+
+.venue-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .time-header {
   background: linear-gradient(135deg, #434343 0%, #000000 100%);
   min-width: 90px;
+  position: -webkit-sticky;
   position: sticky;
   left: 0;
+  top: 0;
   z-index: 30;
   border-right: 2px solid rgba(255, 255, 255, 0.3);
 }
@@ -120,6 +129,7 @@
   background-color: #f8f9fa;
   border-right: 2px solid #dee2e6;
   border-bottom: 1px solid #e9ecef;
+  position: -webkit-sticky;
   position: sticky;
   left: 0;
   z-index: 10;

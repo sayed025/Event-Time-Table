@@ -159,7 +159,7 @@ export const DUMMY_EVENTS: Event[] = [
     venue: 'Venue 10',
     date: '2025-12-03',
     startTime: '10:00',
-    endTime: '15:30',
+    endTime: '12:00',
   },
   {
     id: 'event16',
