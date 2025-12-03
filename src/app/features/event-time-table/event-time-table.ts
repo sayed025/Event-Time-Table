@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-import { Event, Venue, VENUES, DUMMY_EVENTS } from './data/dummy-data';
+import { Event, Venue } from '@core/models';
+import { VENUES, DUMMY_EVENTS } from './data/dummy-data';
 
 @Component({
   selector: 'app-event-time-table',
@@ -25,18 +26,23 @@ export class EventTimeTable implements OnInit {
     const endHour = 18;
     for (let hour = startHour; hour < endHour; hour++) {
       for (let minute = 0; minute < 60; minute += 15) {
-        const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        const timeStr = `${hour.toString().padStart(2, '0')}:${minute
+          .toString()
+          .padStart(2, '0')}`;
         this.timeSlots.push(timeStr);
       }
     }
   }
 
   getEventForSlot(date: string, time: string, venue: string): Event | null {
-    return this.events.find(event => 
-      event.date === date &&
-      event.venue === venue && 
-      this.isTimeInRange(time, event.startTime, event.endTime)
-    ) || null;
+    return (
+      this.events.find(
+        (event) =>
+          event.date === date &&
+          event.venue === venue &&
+          this.isTimeInRange(time, event.startTime, event.endTime)
+      ) || null
+    );
   }
 
   isFirstSlotOfEvent(date: string, time: string, venue: string): boolean {
@@ -48,11 +54,11 @@ export class EventTimeTable implements OnInit {
   getEventRowSpan(date: string, time: string, venue: string): number {
     const event = this.getEventForSlot(date, time, venue);
     if (!event) return 1;
-    
+
     const startMinutes = this.timeToMinutes(event.startTime);
     const endMinutes = this.timeToMinutes(event.endTime);
     const duration = endMinutes - startMinutes;
-    
+
     return duration / 15; // Each slot is 15 minutes
   }
 
@@ -70,7 +76,7 @@ export class EventTimeTable implements OnInit {
   }
 
   generateWeek() {
-    const startDate = new Date(); 
+    const startDate = new Date();
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(startDate);
       currentDate.setDate(startDate.getDate() + i);
@@ -78,7 +84,7 @@ export class EventTimeTable implements OnInit {
       const dayName = currentDate.toLocaleDateString('en-US', {
         weekday: 'long',
       });
-      const dateStr = currentDate.toLocaleDateString('en-CA'); 
+      const dateStr = currentDate.toLocaleDateString('en-CA');
 
       this.weekDays.push({ dayName, date: dateStr });
     }

@@ -1,16 +1,4 @@
-export interface Event {
-  id: string;
-  name: string;
-  venue: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-}
-
-export interface Venue {
-  id: string;
-  name: string;
-}
+import { Event, Venue } from '@core/models';
 
 export const VENUES: Venue[] = [
   { id: 'venue1', name: 'Venue 1' },

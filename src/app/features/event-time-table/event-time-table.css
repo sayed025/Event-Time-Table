@@ -1,4 +1,3 @@
-
 :host ::ng-deep .mat-mdc-tab-header-pagination {
   display: flex !important;
 }
@@ -160,7 +159,7 @@
 
 .event-cell.has-event:hover {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4),
-              0 2px 8px rgba(102, 126, 234, 0.3);
+    0 2px 8px rgba(102, 126, 234, 0.3);
   transform: scale(1.02);
 }
 

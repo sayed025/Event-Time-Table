@@ -1,5 +1,5 @@
 <section class="event-section">
-  <mat-tab-group >
+  <mat-tab-group>
     <mat-tab *ngFor="let day of weekDays">
       <ng-template mat-tab-label>
         <div class="tab-label">
@@ -7,7 +7,7 @@
           <div class="date">{{ day.date }}</div>
         </div>
       </ng-template>
-      
+
       <!-- Timetable Grid -->
       <div class="timetable-container">
         <table class="timetable-grid">
@@ -26,13 +26,28 @@
             <tr class="time-row" *ngFor="let time of timeSlots">
               <td class="time-cell">{{ time }}</td>
               <ng-container *ngFor="let venue of venues">
-                <td 
-                  *ngIf="isFirstSlotOfEvent(day.date, time, venue.name) || !getEventForSlot(day.date, time, venue.name)"
-                  class="event-cell" 
-                  [class.has-event]="getEventForSlot(day.date, time, venue.name)"
-                  [attr.rowspan]="getEventForSlot(day.date, time, venue.name) ? getEventRowSpan(day.date, time, venue.name) : 1"
-                  [attr.title]="getEventForSlot(day.date, time, venue.name)?.name">
-                  <span class="event-name" *ngIf="getEventForSlot(day.date, time, venue.name) as event">
+                <td
+                  *ngIf="
+                    isFirstSlotOfEvent(day.date, time, venue.name) ||
+                    !getEventForSlot(day.date, time, venue.name)
+                  "
+                  class="event-cell"
+                  [class.has-event]="
+                    getEventForSlot(day.date, time, venue.name)
+                  "
+                  [attr.rowspan]="
+                    getEventForSlot(day.date, time, venue.name)
+                      ? getEventRowSpan(day.date, time, venue.name)
+                      : 1
+                  "
+                  [attr.title]="
+                    getEventForSlot(day.date, time, venue.name)?.name
+                  "
+                >
+                  <span
+                    class="event-name"
+                    *ngIf="getEventForSlot(day.date, time, venue.name) as event"
+                  >
                     {{ event.name }}
                   </span>
                 </td>
